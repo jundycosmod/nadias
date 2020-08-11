@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +11,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     $redis =Redis::connection();
-//     $views = $redis->incr("visitCount");
-//     return $views;
-// });
-
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/categories', 'CategoryController@index');
+
+Route::get('/menu-editor/{any?}', 'AdminController@menu')
+    ->middleware('can:edit-menu')
+    ->where('any', '.*');
+	
+Route::get('/menu', 'HomeController@menu');  

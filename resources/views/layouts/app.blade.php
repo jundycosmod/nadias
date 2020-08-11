@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -7,21 +7,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', "Nadia's Garden Restaurant") }} @yield('title')</title>
+    <title>{{ config('app.name', "Nadia's Garden Restaurant") }}@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
-    <link rel="icon" href="/images/favicon.ico">  
+    <link rel="icon" href="/images/favicon.ico"> 
 </head>
-<body>
+<body>    
     <div id="app" class="container">
         <div class="top-bar">
             <div>Call us at (123) 456-7891</div>
@@ -42,27 +38,27 @@
                     <li><a href="#">Location &amp; Hours</a></li>
                     <li class="separator"></li>
                     <li><a href="#">Contact</a></li>
-                    <!-- Authentication Links -->
+                    <li class="separator"></li>
                     @guest
                         <li>
                             <a href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
+                        <li class="separator"></li>
                         @if (Route::has('register'))
                             <li>
-                                <a  href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
-                        <li>
+                        <li>                                                            
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
-                            </form>
+                            </form>                               
                         </li>
                     @endguest
                 </ul>
@@ -78,6 +74,6 @@
             INFORMATION PROVIDED ABOUT THE PRODUCT IS ALSO FICTITIOUS AND SHOULD NOT BE CONSTRUED TO BE REPRESENTATIVE 
             OF ACTUAL PRODUCTS ON THE MARKET IN A SIMILAR PRODUCT CATEGORY.
         </footer>   
-    </div>
+    </div>                           
 </body>
 </html>

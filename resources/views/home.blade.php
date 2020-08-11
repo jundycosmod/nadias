@@ -11,13 +11,12 @@
 </p>
 <img src="/images/patio.jpg" class="home">
 <div class="menu-categories">
-    @foreach ($categories as $category)
+    @foreach ($categories as $cat)
         <article>
-            <a href="/menu#{{str_slug($category->name)}}"><img src="/images/{{$category->image}}"></a>
-            <h2><a href="/menu#{{str_slug($category->name)}}">{{$category->name}}</a></h2>
+            <a href="/menu#{{str_slug($cat->name)}}"><img src="/images/{{$cat->image}}"></a>
+            <h2><a href="/menu#{{str_slug($cat->name)}}">{{$cat->name}}</a></h2>
         </article>   
-    @endforeach
-                
+    @endforeach                                
 </div>
 <div class="social">
     <div>

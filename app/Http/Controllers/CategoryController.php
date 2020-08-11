@@ -14,10 +14,26 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('manage', 'App\Category');
         $categories = Category::orderBy('display_order')->get();
         return view('admin.categories.index', [
 			'categories' => $categories
 		]);
+    }
+
+    public function upsert(Request $request)
+    {
+        $this->authorize('manage', 'App\Category');
+        $categories = $request->post('categories');
+        foreach ($categories as $cat) {
+            if ($cat['id']) {
+                Category::where('id', $cat['id'])->update($cat);
+            }
+            else {
+                Category::create($cat);
+            }
+        }
+        return ['success' => true, 'categories' => Category::all()];
     }
 
     /**
@@ -42,14 +58,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the items in a category.
      *
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function items(Category $category)
     {
-        //
+        return $category->menuItems->map(function ($item) {
+            return $item->only(['id', 'name']);
+        });
     }
 
     /**
@@ -83,6 +101,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $this->authorize('delete', $category);
+        $category->delete();
+        return ['success' => true];
     }
 }

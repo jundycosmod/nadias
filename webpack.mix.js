@@ -12,13 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
-
-if(mix.inProduction()){
-    mix.version();
+   .sass('resources/sass/app.scss', 'public/css');
+   
+if (mix.inProduction()) {
+   mix.version();
 }
 
-mix.browserSync({ 
-    proxy: 'nadias.test',
-    files: ['public/**/*.css', 'resources/**/*']
-});
+mix.browserSync('dev.nadias');
+
+
